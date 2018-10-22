@@ -2,8 +2,13 @@
     <div>
         <div class='gist__item'>
         <div class="gits__url">{{ gistData.gistUrl }}</div>
+        
+        <div class="tag__wrapper files">
+            <Tag v-for="file in gistData.gistMeta.files" :tag-value="file" class="tag filenames" />
+        </div>
+
         <div class="tag__wrapper">
-            <Tag v-for="tag in gistData.tags" :tag-value="tag" class="file__tag" />
+            <Tag v-for="tag in gistData.gistMeta.tags" :tag-value="tag" class="tag filetypes" />
 
         </div>
         <div class="avatar__container">
@@ -36,7 +41,7 @@ export default {
 
 </script>
 
-<style lang="stylus" scoped>
+<style scoped lang="stylus" >
 
 .avatar__container
     padding-top 10px
@@ -47,13 +52,16 @@ export default {
 .avatar__item
     margin-right 8px
 
-.file__tag
+tag
     margin-right 4px
     margin-top 2px
     display inline-block
+
+
 .tag__wrapper
     margin-top 10px
     margin-bottom 10px
+
 .gits__url
     color grey
 .gist__item
@@ -64,4 +72,6 @@ export default {
     margin-bottom 20px
     width 400px
     box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    &:hover
+        border-left 3px solid grey
 </style>
