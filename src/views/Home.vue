@@ -11,16 +11,13 @@
 </template>
 
 <script>
+
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import search from '@/components/search.vue';
 import GistItem from '@/components/GistItem'
 import {getGistForks} from '@/services/forks'
 import {fileTypeToTag} from '@/utils/main'
-
-
-
-
 
 
 export default {
@@ -32,14 +29,10 @@ export default {
   },
   methods:{
     getTagsAndFileName(filesObj){
-      // alert(JSON.stringify(data))
-      // console.log('oo',data)
       const fileNames = Object.keys(filesObj);
       let tags = []
       for (let i = 0; i < fileNames.length; i++) {
-          var fileName = fileNames[i];
-          // console.log('fn',fileName)
-          console.log('fo',filesObj[fileName]['type'])
+          var fileName = fileNames[i]
           tags.push(filesObj[fileName]['type'])
       }
       tags = fileTypeToTag(tags)
@@ -47,20 +40,18 @@ export default {
 
     },
     onDataRecieved(value){
-      console.log(value)
+      this.gistData = []
       var userGists = value
       userGists.forEach(el => {
         getGistForks(el.id).then(response => {
             let temp = []
             response.data.forEach(fork => {
-              console.log('fork=>',fork)
               temp.push({
                   avatarUrl:fork.owner.avatar_url,
                   forkUrl:fork.html_url,
                   name:fork.owner.login,
                   forkCreatedAt: new Date(fork.created_at)
               })
-              console.log(temp)
             })
 
             let metaInfo = this.getTagsAndFileName(el.files)
@@ -73,7 +64,6 @@ export default {
             })
       
       })
-      // console.log(this.gistData)
     }
   },
   data: function(){
@@ -172,48 +162,7 @@ export default {
   // ]
 }
 },
-  computed:{
-    // gists(){
-    //   // return this.$store.state.gists
-    //     return [
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
-    //       {html_url:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3"},
 
-
-    //     ]
-    // },
-  //   gists(){
-      
-  //     var userGists = this.$store.state.gists;
-  //     userGists.forEach(el => {
-  //       getGistForks(el.id).then(response => {
-  //           let temp = []
-  //           response.data.forEach(fork => {
-  //             console.log('fork=>',fork)
-  //             temp.push({
-  //                 avatarUrl:fork.owner.avatar_url,
-  //                 forkUrl:fork.html_url,
-  //                 name:fork.owner.login,
-  //             })
-  //           })
-  //           gistData.push({
-  //             gistUrl:'ejhdwuferfkerkjbfrjsfbewvjsfkewjfq3rvfjhgrkejfv',
-  //             forkInfo:temp
-  //           })
-  //           })
-      
-  //     })
-  //     console.log(gistData)
-  //     return gistData
-
-  // }
-
-  }
 }
 </script>
 <style lang="stylus" scoped>
