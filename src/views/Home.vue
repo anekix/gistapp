@@ -53,24 +53,19 @@ export default {
         getGistForks(el.id).then(response => {
             let temp = []
             response.data.forEach(fork => {
-              console.log('fork=>',fork)
+              // console.log('fork=>',fork)
               temp.push({
                   avatarUrl:fork.owner.avatar_url,
                   forkUrl:fork.html_url,
                   name:fork.owner.login,
               })
             })
-            // alert(JSON.stringify(el.files))
-            console.log('ell',el.files)
 
             let metaInfo = this.getTagsAndFileName(el.files)
-            // alert(JSON.stringify(metaInfo))
-            // console.log('metaInfo'.metaInfo)
-            // console.log('el',el)
-
+            let gistUrl = el.html_url
             this.gistData.push({
               gistMeta:metaInfo,
-              gistUrl:'ejhdwuferfkerkjbfrjsfbewvjsfkewjfq3rvfjhgrkejfv',
+              gistUrl:gistUrl,
               forkInfo:temp
             })
             })

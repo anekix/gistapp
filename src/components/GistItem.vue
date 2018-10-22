@@ -1,8 +1,10 @@
 <template>
     <div>
         <div class='gist__item'>
+        <a :href="gistData.gistUrl" target="_blank">
+
         <div class="gits__url">{{ gistData.gistUrl }}</div>
-        
+        </a>
         <div class="tag__wrapper files">
             <Tag v-for="file in gistData.gistMeta.files" :tag-value="file" class="tag filenames" />
         </div>
@@ -21,6 +23,7 @@
             />
         </div>
         </div>
+    
     </div>
 </template>
 

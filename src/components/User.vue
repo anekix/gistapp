@@ -1,12 +1,11 @@
 <template>
 		<div>
 			<div class="user__wrapper">
-				
 				<img 
 					:src="userAvatarUrl"
 					class="user__avatar" 
 				 />
-				<a :href="userForkLink">
+				<a :href="userForkLink" target="_blank">
 				<div> {{userName}}</div>
 				</a>
 
