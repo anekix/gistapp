@@ -53,12 +53,14 @@ export default {
         getGistForks(el.id).then(response => {
             let temp = []
             response.data.forEach(fork => {
-              // console.log('fork=>',fork)
+              console.log('fork=>',fork)
               temp.push({
                   avatarUrl:fork.owner.avatar_url,
                   forkUrl:fork.html_url,
                   name:fork.owner.login,
+                  forkCreatedAt: new Date(fork.created_at)
               })
+              console.log(temp)
             })
 
             let metaInfo = this.getTagsAndFileName(el.files)

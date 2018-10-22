@@ -21,7 +21,7 @@ export default new Vuex.Store({
         .then(response => {
                 store.commit('setGistsData', response.data)
                 return store.state.gists
-              })
+          })
     }
 
   }

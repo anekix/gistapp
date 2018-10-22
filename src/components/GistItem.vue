@@ -16,7 +16,7 @@
         <div class="avatar__container">
             <User
                 class="avatar__item"
-                v-for="item in  gistData.forkInfo"
+                v-for="item in  forks"
                 :user-avatar-url="item.avatarUrl" 
                 :user-name="item.name"
                 :user-fork-link="item.forkUrl"
@@ -38,7 +38,16 @@ export default {
   components:{
     User,
     Tag
-  }
+  },
+computed: {
+    forks() {
+        if (this.gistData.forkInfo.length > 1){
+            this.gistData.forkInfo.sort((a,b) => new Date(new Date(b.forkCreatedAt).getTime()-a.forkCreatedAt).getTime())
+        }
+        return this.gistData.forkInfo.slice(0,3)
+  }     
+}
+
 
 }
 
@@ -50,8 +59,8 @@ export default {
     padding-top 10px
     display flex
     flex-direction row
-    //background-color red
     justify-content center
+
 .avatar__item
     margin-right 8px
 
@@ -60,13 +69,13 @@ export default {
     margin-top 2px
     display inline-block
 
-
 .tag__wrapper
     margin-top 10px
     margin-bottom 10px
 
 .gits__url
     color grey
+
 .gist__item
     padding-top 20px
     padding-bottom 20px
