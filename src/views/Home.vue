@@ -2,7 +2,7 @@
   <div class="home">
       <div class="main_wrapper">
        <div class="gist__wrapper">
-        <search dispatchMethod='fetchUserGists' v-on:childToParent="onDataRecieved"/>
+        <Search dispatchMethod='fetchUserGists' v-on:childToParent="onDataRecieved"/>
         <GistItem v-for="item in gistData" :gist-data="item" class="gist__infobox" />
        </div>
 
@@ -14,7 +14,7 @@
 
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import search from '@/components/search.vue';
+import Search from '@/components/Search';
 import GistItem from '@/components/GistItem'
 import {getGistForks} from '@/services/forks'
 import {fileTypeToTag} from '@/utils/main'
@@ -24,25 +24,42 @@ export default {
   name: 'home',
   components: {
     HelloWorld,
-    search,
+    Search,
     GistItem,
   },
   methods:{
-    getTagsAndFileName(filesObj){
+    /**
+     * Takes filesObj returned by github api & return filename & filetypes
+     * @param  {Object} filesObj returnde by the github api
+     * @return {Object} an object containing filename & filetypes 
+     *
+     */
+    getTagsAndFileName(filesObj) {
       const fileNames = Object.keys(filesObj);
       let tags = []
       for (let i = 0; i < fileNames.length; i++) {
-          var fileName = fileNames[i]
-          tags.push(filesObj[fileName]['type'])
+        var fileName = fileNames[i]
+        tags.push(filesObj[fileName]['type'])
       }
       tags = fileTypeToTag(tags)
-      return { tags:tags, files:fileNames }
-
+      return {
+        tags: tags,
+        files: fileNames
+      }
     },
+
+    /**
+     * Called when data is emitted from the child search component,
+     * sets the value of this.gistData (which is required to render the gists)
+     * @param  {any} object returned by the emitted by the child component
+     * @return {undefined} 
+     *
+     */
     onDataRecieved(value){
       this.gistData = []
       var userGists = value
       userGists.forEach(el => {
+
         getGistForks(el.id).then(response => {
             let temp = []
             response.data.forEach(fork => {
@@ -56,6 +73,7 @@ export default {
 
             let metaInfo = this.getTagsAndFileName(el.files)
             let gistUrl = el.html_url
+
             this.gistData.push({
               gistMeta:metaInfo,
               gistUrl:gistUrl,
@@ -66,100 +84,10 @@ export default {
       })
     }
   },
+
   data: function(){
     return {
       gistData:[],
-  //     gistData:[
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         tags:['python', 'javascript','elm','ruby','lisp','python', 'javascript','elm','ruby','lisp'],
-
-  //         forkInfo:[
-
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@ashisray12',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
-          
-  //       },
-
-  //       {
-
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@gautamagrawwal2',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
-
-  //       },        
-
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
-  //                     tags:['python', 'javascript','elm','ruby','lisp']
-
-  //       },       
-  //     ]
-  //   },
-
-  //           {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //               tags:['python', 'javascript','elm','ruby','lisp'],
-
-  //         forkInfo:[
-
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@anekix',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
-          
-  //       },
-
-  //       {
-
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },        
-
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },       
-  //     ]
-  //   },
-
-  //     {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         tags:['python', 'javascript','elm','ruby','lisp'],
-
-  //         forkInfo:[
-
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@anekix',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
-          
-  //       },
-
-  //       {
-
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },        
-
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },       
-  //     ]
-  //   }
-  // ]
 }
 },
 
