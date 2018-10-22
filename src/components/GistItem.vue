@@ -52,7 +52,7 @@ export default {
 .avatar__item
     margin-right 8px
 
-tag
+.tag
     margin-right 4px
     margin-top 2px
     display inline-block

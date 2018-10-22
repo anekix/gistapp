@@ -1,7 +1,11 @@
 export function fileTypeToTag(files){
-		let tags = []
+		var tags = []
 		files.forEach(fileType => {
-			tags.push(fileType.split("/")[1])
+			var type = fileType.split("/")[1]
+			var idx = tags.indexOf(type)
+			if(idx == -1){
+				tags.push(type)
+			}
 		})
 		return tags
 }
