@@ -1,17 +1,19 @@
 <template>
 		<div>
+			<a :href="userForkLink">
 			<img 
 				:src="userAvatarUrl"
 				class="user__avatar" 
 				 />
+			</a>
 			 <div> {{userName}}</div>
 		</div>
 </template>
 <script>
 	
 	export default {
-		name: 'userAvatar',
-		props:[ 'userAvatarUrl','userName']
+		name: 'User',
+		props:[ 'userAvatarUrl','userName','userForkLink']
 	}
 
 </script>

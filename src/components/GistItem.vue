@@ -5,11 +5,12 @@
         <div>
         </div>
         <div class="avatar__container">
-            <userAvatar 
+            <User
                 class="avatar__item"
                 v-for="item in  gistData.forkInfo"
                 :user-avatar-url="item.avatarUrl" 
                 :user-name="item.name"
+                :user-fork-link="item.forkUrl"
             />
         </div>
         </div>
@@ -18,14 +19,14 @@
 
 <script>
 
-import userAvatar from '@/components/avatar'
+import User from '@/components/User'
 
 export default {
   
   name: 'GistItem',
   props:['gistData'],
   components:{
-    userAvatar
+    User
   }
 
 }

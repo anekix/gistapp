@@ -39,7 +39,9 @@ export default{
         self.timeout = setTimeout(function(){
             self.$store.dispatch(self.dispatchMethod, {queryString:self.query})
                 .then( data => {
-                   console.log(data)
+                   // console.log(data)
+                    self.$emit('childToParent', data)
+
                 })
         },500)
     }
