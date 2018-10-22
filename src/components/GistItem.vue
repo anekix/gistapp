@@ -1,8 +1,10 @@
 <template>
     <div>
         <div class='gist__item'>
-        <div>{{ gistData.gistUrl }}</div>
-        <div>
+        <div class="gits__url">{{ gistData.gistUrl }}</div>
+        <div class="tag__wrapper">
+            <Tag v-for="tag in gistData.tags" :tag-value="tag" class="file__tag" />
+
         </div>
         <div class="avatar__container">
             <User
@@ -20,13 +22,14 @@
 <script>
 
 import User from '@/components/User'
-
+import Tag from '@/components/Tag'
 export default {
   
   name: 'GistItem',
   props:['gistData'],
   components:{
-    User
+    User,
+    Tag
   }
 
 }
@@ -44,10 +47,20 @@ export default {
 .avatar__item
     margin-right 8px
 
+.file__tag
+    margin-right 4px
+    margin-top 2px
+    display inline-block
+.tag__wrapper
+    margin-top 10px
+    margin-bottom 10px
+.gits__url
+    color grey
 .gist__item
-    padding-top 6px
-    padding-left 6px
-    padding-right 6px
+    padding-top 20px
+    padding-bottom 20px
+    padding-left 20px
+    padding-right 20px
     margin-bottom 20px
     width 400px
     box-shadow 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);

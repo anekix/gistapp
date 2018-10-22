@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div>
-      {{gistData}}
-
+<!--       {{gistData}}
+ -->
     </div>
        <search dispatchMethod='fetchUserGists' v-on:childToParent="onDataRecieved"/>
        <div v-for="item in gistData">
@@ -31,114 +31,123 @@ export default {
   },
   methods:{
     onDataRecieved(value){
-      console.log(value)
-      var userGists = value
-      userGists.forEach(el => {
-        getGistForks(el.id).then(response => {
-            let temp = []
-            response.data.forEach(fork => {
-              console.log('fork=>',fork)
-              temp.push({
-                  avatarUrl:fork.owner.avatar_url,
-                  forkUrl:fork.html_url,
-                  name:fork.owner.login,
-              })
-            })
-            this.gistData.push({
-              gistUrl:'ejhdwuferfkerkjbfrjsfbewvjsfkewjfq3rvfjhgrkejfv',
-              forkInfo:temp
-            })
-            })
+      // console.log(value)
+      // var userGists = value
+      // userGists.forEach(el => {
+      //   getGistForks(el.id).then(response => {
+      //       let temp = []
+      //       response.data.forEach(fork => {
+      //         console.log('fork=>',fork)
+      //         temp.push({
+      //             avatarUrl:fork.owner.avatar_url,
+      //             forkUrl:fork.html_url,
+      //             name:fork.owner.login,
+      //         })
+      //       })
+      //       this.gistData.push({
+      //         gistUrl:'ejhdwuferfkerkjbfrjsfbewvjsfkewjfq3rvfjhgrkejfv',
+      //         forkInfo:temp
+      //       })
+      //       })
       
-      })
+      // })
       // console.log(this.gistData)
     }
   },
   data: function(){
     return {
-      gistData:[],
-  //     gistData:[
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         forkInfo:[
+      //gistData:[],
+      gistData:[
+        {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+          tags:['python', 'javascript','elm','ruby','lisp','python', 'javascript','elm','ruby','lisp'],
 
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@anekix',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
+          forkInfo:[
+
+          {
+            avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+            name: '@ashisray12',
+            forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
           
-  //       },
+        },
 
-  //       {
+        {
 
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },        
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@gautamagrawwal2',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
 
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },       
-  //     ]
-  //   },
+        },        
 
-  //           {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         forkInfo:[
+        {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@anekix',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
+                      tags:['python', 'javascript','elm','ruby','lisp']
 
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@anekix',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
+        },       
+      ]
+    },
+
+            {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+                tags:['python', 'javascript','elm','ruby','lisp'],
+
+          forkInfo:[
+
+          {
+            avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+            name: '@anekix',
+            forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
           
-  //       },
+        },
 
-  //       {
+        {
 
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },        
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@anekix',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
+        },        
 
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },       
-  //     ]
-  //   },
+        {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@anekix',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
+        },       
+      ]
+    },
 
-  //     {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         forkInfo:[
+      {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+          tags:['python', 'javascript','elm','ruby','lisp'],
 
-  //         {
-  //           avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //           name: '@anekix',
-  //           forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
+          forkInfo:[
+
+          {
+            avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+            name: '@anekix',
+            forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4",
           
-  //       },
+        },
 
-  //       {
+        {
 
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },        
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@anekix',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
+        },        
 
-  //       {
-  //         gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
-  //         avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
-  //         name: '@anekix',
-  //         forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
-  //       },       
-  //     ]
-  //   }
-  // ]
+        {
+          gistUrl:"https://gist.github.com/95ecc104bc05ede915492367d2d72cb3",
+          avatarUrl:"http://www.simon-li.com/projects/mongkok-wp/wp-content/uploads/2014/07/random-user-31.jpg" ,
+          name: '@anekix',
+          forkUrl:"https://avatars3.githubusercontent.com/u/10773612?v=4"
+        },       
+      ]
+    }
+  ]
 }
 },
   computed:{
